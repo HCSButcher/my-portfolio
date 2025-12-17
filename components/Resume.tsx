@@ -83,12 +83,12 @@ const education = {
     {
       institution: "online Course Platform (PLP) ",
       degree: "Software Development Scholarship ",
-      duration: "Graduating December 2025 ",
+      duration: "Graduated ",
     },
     {
       institution: "Kabarak University ",
       degree: "Bachelor of Business Management and IT ",
-      duration: "Graduating December 2025 ",
+      duration: "Graduated ",
     },
   ],
 };
@@ -103,9 +103,9 @@ export default function Resume() {
           <div className=" container mx-auto">
             <Tabs
               defaultValue="experience"
-              className="flex flex-col xl:flex-row gap-[60px]"
+              className="flex flex-col   xl:flex-row gap-[60px]"
             >
-              <TabsList className="flex   flex-col w-full max-w-[380px] mx-auto xl:mx-0 gap-6 ">
+              <TabsList className="flex bg-  flex-col w-full max-w-[380px] mx-auto xl:mx-0 gap-6 ">
                 <TabsTrigger value="experience">Experience</TabsTrigger>
                 <TabsTrigger value="education">Education</TabsTrigger>
               </TabsList>
@@ -134,9 +134,40 @@ export default function Resume() {
                                 {Item.type}
                               </h3>
                               <div>
-                                <p className="text-white/60 whitespace-pre-line text-muted-foreground">
-                                  {" "}
-                                  {Item.description}{" "}
+                                <p className="text-white/60 whitespace-pre-line ">
+                                  {Item.description}
+                                </p>
+                              </div>
+                            </li>
+                          );
+                        })}
+                      </ul>
+                    </ScrollArea>
+                  </div>
+                </TabsContent>
+                <TabsContent value="education" className="w-full">
+                  <div className="flex flex-col gap-[30px] text-center xl:text-left ">
+                    <h3 className="text-4xl font-bold">{education.title} </h3>
+                    <p className="max-w-[600px ] text-white/60 mx-auto xl:mx-0  ">
+                      {education.description}
+                    </p>
+                    <ScrollArea className="h-[400px] overflow-auto ">
+                      <ul className="grid grid-cols-1 lg:grid-cols-2 gap-[30px]  ">
+                        {education.items.map((item, index) => {
+                          return (
+                            <li
+                              className="bg-[#232329] h-[150px] py-6 px-10 rounded-xl flex-col justify-center items-center lg:items-start gap-1  "
+                              key={index}
+                            >
+                              <span className="text-[#00ff99] uppercase text-xl  ">
+                                {item.duration}
+                              </span>
+                              <h3 className="text-xl min-h-[60px ] justify-center items-center lg:items-start gap-1 ">
+                                {item.degree}{" "}
+                              </h3>
+                              <div>
+                                <p className="text-white/60">
+                                  {item.institution}{" "}
                                 </p>
                               </div>
                             </li>

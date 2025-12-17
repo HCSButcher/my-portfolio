@@ -95,7 +95,7 @@ export default function Skills() {
             {skills.map((skill, index) => {
               return (
                 <li
-                  className=" flex rounded-xl flex-col items-center bg-[#232329] hover:bg-[#00ff99] hover:text-[#232329] cursor-pointer  h-[80px] w-[80] text-[#00ff99] "
+                  className=" flex rounded-xl flex-col items-center bg-[#232329] hover:bg-[#00ff99] hover:text-[#232329] cursor-pointer  h-[80px] w-[120] text-[#00ff99] "
                   key={index}
                 >
                   <span className=" mt-4 text-xl">{skill.icon} </span>

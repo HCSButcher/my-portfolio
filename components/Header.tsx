@@ -11,7 +11,7 @@ export default function Header() {
     <header
       className="sticky top-0 z-50
         bg-black/60 backdrop-blur-md
-        py-6 xl:py-8
+        py-6 xl:py-5
         text-white"
     >
       <div className="container mx-auto flex justify-between items-center">

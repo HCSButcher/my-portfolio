@@ -29,10 +29,10 @@ export default function MobileNav() {
 
   return (
     <Sheet>
-      <SheetTrigger className="flex justify-center items-center">
+      <SheetTrigger className="flex  justify-center items-center">
         <CiMenuFries className="text-[32px] text-[#00ff99]" />
       </SheetTrigger>
-      <SheetContent className="flex flex-col">
+      <SheetContent className="flex bg-transparent  flex-col">
         {/*logo */}
         <div className="mt-32 mb-20 text-center text-2xl">
           <Link href="/">

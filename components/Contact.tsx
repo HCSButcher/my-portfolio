@@ -58,7 +58,7 @@ export default function Contact() {
 
   return (
     <Section id="contact">
-      <div className="container mx-auto min-h-screen">
+      <div className=" mx-4 xl:container min-h-screen">
         <div className="flex flex-col xl:flex-row gap-12">
           <div className="xl:w-[54%] order-2 xl:order-0">
             <form
@@ -159,13 +159,13 @@ export default function Contact() {
             </form>
           </div>
           <div className="flex-1 flex items-center xl:justify-end order-1 xl:order-0 mb-8 xl:mb-0">
-            <ul className="flex flex-col gap-8 w-full max-w-sm">
+            <ul className="flex flex-col gap-1 w-full max-w-sm">
               {info.map((item, index) => (
                 <li
                   key={index}
-                  className="flex items-center gap-6 py-4 px-4 rounded-2xl"
+                  className="flex items-center gap-3 py-2 px-4 rounded-2xl"
                 >
-                  <div className="w-[52px] h-[52px] xl:w-[72px] xl:h-[72px] bg-[#1f1f23] text-accent rounded-xl flex items-center justify-center flex-shrink-0">
+                  <div className="w-[52px] h-[52px] xl:w-[72px] xl:h-[72px] bg-[#1f1f23] text-accent rounded-xl flex items-center justify-center shrink-0">
                     <div className="text-[28px]">{item.icon}</div>
                   </div>
                   <div className="flex-1">

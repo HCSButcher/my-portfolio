@@ -5,15 +5,15 @@ import Image from "next/image";
 
 export default function Photo() {
   return (
-    <div className="w-full h-full flex justify-center items-center">
+    <div className="w-full flex justify-center items-center py-6">
       <motion.div
         initial={{ opacity: 0 }}
         animate={{
           opacity: 1,
           transition: {
-            delay: 2,
+            delay: 1,
             duration: 0.4,
-            ease: [0.4, 0, 0.2, 1], // ✅ TS-safe easing
+            ease: [0.4, 0, 0.2, 1],
           },
         }}
         className="relative w-[170px] h-[170px] xl:w-[400px] xl:h-[400px]"
@@ -52,7 +52,7 @@ export default function Photo() {
           animate={{
             opacity: 1,
             transition: {
-              delay: 1.4,
+              delay: 1.2,
               duration: 0.4,
               ease: [0.4, 0, 0.2, 1],
             },

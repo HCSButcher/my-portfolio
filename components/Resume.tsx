@@ -81,14 +81,14 @@ const education = {
     "Throughout my education journey, I have been able to come across the various technologies which have in turn helped me better understand the various technologies I am proficient in",
   items: [
     {
-      institution: "online Course Platform (PLP) ",
+      institution: "Power Learn Project(PLP) ",
       degree: "Software Development Scholarship ",
-      duration: "Graduated ",
+      duration: "7/2025 - 12/2025 ",
     },
     {
       institution: "Kabarak University ",
       degree: "Bachelor of Business Management and IT ",
-      duration: "Graduated ",
+      duration: "9/2021 - 9/2025 ",
     },
   ],
 };
@@ -127,7 +127,7 @@ export default function Resume() {
                               className="bg-[#232329] h-auto py-6 px-10 rounded-xl flex-col justify-center items-start text-left lg:items-start gap-1 "
                               key={index}
                             >
-                              <span className="text-[#00ff99] ">
+                              <span className=" text-2xl text-[#00ff99] ">
                                 {Item.project}
                               </span>
                               <h3 className="text-xl max-w-[200px] min-h-[40px] text-left lg:items-start  ">
@@ -148,7 +148,7 @@ export default function Resume() {
                 <TabsContent value="education" className="w-full">
                   <div className="flex flex-col gap-[30px] text-center xl:text-left ">
                     <h3 className="text-4xl font-bold">{education.title} </h3>
-                    <p className="max-w-[600px ] text-white/60 mx-auto xl:mx-0  ">
+                    <p className="max-w-[600px ] text-white/60 mx-auto  xl:mx-0  ">
                       {education.description}
                     </p>
                     <ScrollArea className="h-[400px] overflow-auto ">

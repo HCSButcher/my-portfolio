@@ -25,7 +25,11 @@ export default function Header() {
         <div className="hidden  xl:flex items-center gap-8">
           <Navbar />
           <Link href="#contact">
-            <Button className="hover:bg-[black] hover:text-[#00ff99] ">
+            <Button
+              variant="default" // required
+              size="lg" // required
+              className="hover:bg-[black] hover:text-[#00ff99]"
+            >
               Hire me
             </Button>
           </Link>

@@ -108,8 +108,8 @@ const projects = [
       "A personal portfolio showcasing projects, skills, and experience",
     stack: [{ name: "Next.js" }, { name: "Tailwindcss" }],
     image: "/assets/work/thumb3.png",
-    live: "https://portfolio-8j13.onrender.com",
-    github: "https://github.com/HCSButcher/portfolio",
+    live: "https://my-portfolio-chi-two-94.vercel.app",
+    github: "https://github.com/HCSButcher/my-portfolio",
   },
   {
     num: "07",

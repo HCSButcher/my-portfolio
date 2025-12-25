@@ -44,15 +44,16 @@ export default function Hero() {
               </p>
               {/*btn and socials*/}
               <div className="flex flex-col xl:flex-row items-center gap-2 xl:mt-5">
-                <Link href="/MY_RESUME.pdf" download>
+                <a href="/MY_RESUME.pdf" download>
                   <Button
                     variant="outline"
                     size="lg"
-                    className="uppercase  rounded-full flex items-center"
+                    className="uppercase rounded-full flex items-center"
                   >
                     <span>Download CV</span>
                   </Button>
-                </Link>
+                </a>
+
                 <div className=" mt-0 xl:mt-0">
                   <Social
                     containerStyles="flex gap-6"

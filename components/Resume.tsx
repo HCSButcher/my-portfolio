@@ -17,10 +17,16 @@ const experience = {
     "These are but some of the projects I have been able to complete in order to better understand the various technologies I am proficient in ",
   items: [
     {
-      project: " Hack it together",
+      project: " HACKRIFT",
       type: "Backend developer",
       description:
         "Currently volunteering in building a cyber security LMS as the backend developer  ",
+    },
+    {
+      project: "AlturaCyber",
+      type: "Backend developer",
+      description:
+        "Currently volunteering in building a cyber security website as the backend developer  ",
     },
     {
       project: "Pixel Academy",

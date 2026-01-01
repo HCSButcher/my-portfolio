@@ -58,7 +58,7 @@ const projects = [
     category: "Backend (Web app) ",
     title: "HACKRIFT",
     description:
-      "This is a cybersecurity LMS platform where I am currently volunteering as a backend developer",
+      "This is a cybersecurity LMS platform where I am currently volunteering as a backend developer and also doing API integration, state handling and minimal UI fixes ",
     stack: [
       { name: "Nextjs" },
       { name: "Express" },
@@ -71,6 +71,22 @@ const projects = [
   },
   {
     num: "04",
+    category: "Backend (Website) ",
+    title: "AlturaCyber",
+    description:
+      "This is a cybersecurity website where I am also currently volunteering as a backend developer where I am currently volunteering as a backend developer and also doing API integration, state handling and minimal UI fixes",
+    stack: [
+      { name: "Nextjs" },
+      { name: "Express" },
+      { name: "tailwindcss" },
+      { name: "MongoDB" },
+    ],
+    image: "/assets/work/altura.png",
+    live: undefined,
+    github: undefined,
+  },
+  {
+    num: "05",
     category: "Fullstack (Web app) ",
     title: "Corporate Munch",
     description: "This is my startup",
@@ -85,7 +101,7 @@ const projects = [
     github: undefined,
   },
   {
-    num: "05",
+    num: "06",
     category: "Full Stack (Web app) ",
     title: "Course Material Repository App",
     description:
@@ -101,7 +117,7 @@ const projects = [
     github: "http://github.com/HCSButcher/PROJECT-2",
   },
   {
-    num: "06",
+    num: "07",
     category: "Frontend (Website) ",
     title: "Personal Portfolio",
     description:
@@ -112,7 +128,7 @@ const projects = [
     github: "https://github.com/HCSButcher/my-portfolio",
   },
   {
-    num: "07",
+    num: "08",
     category: "Full Stack (Web app) ",
     title: "Live Chat",
     description: "A real-time chat application demonstrating WebSocket usage",

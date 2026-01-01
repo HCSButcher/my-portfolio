@@ -9,6 +9,8 @@ import {
 } from "react-icons/fa";
 import {
   SiNextdotjs,
+  SiPostgresql,
+  SiPrisma,
   SiTailwindcss,
   SiExpress,
   SiReact,
@@ -28,6 +30,8 @@ const skills = [
   { icon: <SiTailwindcss />, name: "tailwindCss" },
   { icon: <SiExpress />, name: "express" },
   { icon: <SiMongodb />, name: "mongoDb" },
+  { icon: <SiPostgresql />, name: "postgresql" },
+  { icon: <SiPrisma />, name: "prisma" },
   { icon: <SiMysql />, name: "Mysql" },
   { icon: <FaHtml5 />, name: "html 5" },
   { icon: <FaCss3 />, name: "css 3" },

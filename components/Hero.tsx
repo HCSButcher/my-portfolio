@@ -28,18 +28,18 @@ export default function Hero() {
           <div className=" flex flex-col xl:flex-row items-center justify-between xl:pt-2 xl:pb-3">
             <div className=" mx-5 text-center xl:text-left order-2 xl:order-0">
               <span className=" text-xl">
-                Fullstack (MERN)Software Developer <br />
+                Fullstack (MERN) Software Developer <br />
                 Expertise in{" "}
-                <span className="text-[#00ff99] ">Nest.js and Next.js </span>
+                <span className="text-[#00ff99] ">Nest.js, Next.js and React Native</span>
               </span>
-              <h1 className="text-5xl xl:text-7xl mb-0 xl:mb-0 ">
+              <h1 className="text-5xl xl:text-7xl mb-0 xl:mt-2 xl:mb-0 ">
                 Hello I am <br />
                 <span className="text-[#00ff99] ">Trevor Oduol</span>
               </h1>
               <p className="max-w-[600px] mx-5 xl:mx-1  mb-1 xl:mb-2 xl:mt-2 text-left text-white/80 text-xl  ">
                 I am a full stack MERN software developer with expertise in
-                Nest.js and Next.js. I excel at crafting elegant digital
-                software experiences and enthusiastic about solving real world
+                Nest.js, Next.js and React Native. I excel at crafting elegant digital
+                software experiences together with their corresponding mobile apps. I am also enthusiastic about solving real world
                 problems
               </p>
               {/*btn and socials*/}

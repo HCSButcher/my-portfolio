@@ -5,6 +5,7 @@ export default function About() {
     { name: "Name:", value: "Trevor Oduol" },
     { name: "Phone:", value: "(+254) 748 092 687" },
     { name: "Experience:", value: "2+ years" },
+    {name: 'LinkedIn', value:'Aduol Trevor Oduol' },
     { name: "Instagram:", value: "@the_Bu_tch_er" },
     { name: "Nationality:", value: "Kenyan" },
     { name: "Email:", value: "trevor254oduol@gmail.com" },
@@ -17,10 +18,9 @@ export default function About() {
         <h2 className="text-3xl text-center font-bold">About Me</h2>
 
         <p className="mt-4 text-gray-400 text-base xl:text-2xl">
-          I am a Fullstack (MERN) developer with expertise in Next.js and
-          Nest.js. I build scalable and modern web applications using React,
+          I am a Fullstack (MERN) developer with expertise in Next.js, Nest.js and React Native . I build scalable and modern web applications using React,
           Next.js and Node.js (
-          <span className="text-[#00ff99]"> Nest.js | Express.js </span>)
+          <span className="text-[#00ff99]"> Nest.js | Express.js </span>). I also build cross platform mobile apps using React Native
         </p>
 
         <ul className="grid grid-cols-1 xl:grid-cols-2 gap-y-6 gap-x-10 mt-6">

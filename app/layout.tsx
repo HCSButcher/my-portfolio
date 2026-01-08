@@ -4,10 +4,11 @@ import { JetBrains_Mono } from "next/font/google";
 import Header from "@/components/Header";
 import "./globals.css";
 
-const JetBrainsMono = JetBrains_Mono({
+const jetBrainsMono = JetBrains_Mono({
   subsets: ["latin"],
-  weight: ["100", "200", "400", "500", "500", "600", "700", "800"],
-  variable: "--font-jetBrainsMono",
+  weight: ["100", "200", "400", "500", "600", "700", "800"],
+  variable: "--font-jetbrains-mono",
+  display: "swap", // ✅ important for offline & slow networks
 });
 
 export const metadata: Metadata = {
@@ -17,12 +18,10 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+}: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en">
-      <body className={`${JetBrainsMono.variable} ${JetBrainsMono.className}`}>
+      <body className={jetBrainsMono.variable}>
         <Header />
         {children}
       </body>

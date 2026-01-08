@@ -1,13 +1,13 @@
 "use client";
 import Section from "./Section";
-import { useRef, useState } from "react";
-import emailjs from "@emailjs/browser";
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import * as SelectPrimitive from "@radix-ui/react-select";
 import { FaPhoneAlt, FaEnvelope, FaMapMarkerAlt } from "react-icons/fa";
 import { Check } from "lucide-react";
+import toast, { Toaster } from "react-hot-toast";
 
 const info = [
   {
@@ -28,42 +28,106 @@ const info = [
 ];
 
 export default function Contact() {
-  const formRef = useRef<HTMLFormElement | null>(null);
+  const [formData, setFormData] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+    phoneNumber: "",
+    selectedService: "",
+    message: "",
+  });
 
-  const [selectedService, setSelectedService] = useState("");
-  const sendEmail = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleChange = (
+    e: React.ChangeEvent<
+      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
+    >
+  ) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value,
+    });
+  };
+  const [loading, setLoading] = useState(false);
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-
-    if (!formRef.current) return;
-
-    emailjs
-      .sendForm(
-        "service_3om36yo", // Replace with your actual service ID
-        "template_y0mqnfq", // Replace with your actual template ID
-        formRef.current,
-        "szm5rBcxM44y9nNqc" // Replace with your actual public key
-      )
-      .then(
-        (result) => {
-          console.log("Email sent:", result.text);
-          alert("Message sent successfully!");
-          formRef.current?.reset();
-        },
-        (error) => {
-          console.log("Email error:", error.text);
-          alert("Something went wrong.Please try again.");
+    setLoading(true);
+    try {
+      const res = await fetch(
+        `${process.env.NEXT_PUBLIC_API_URL}/user/consultation`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            firstName: formData.firstName,
+            lastName: formData.lastName,
+            phoneNumber: formData.phoneNumber,
+            email: formData.email,
+            selectedService: formData.selectedService,
+            message: formData.message,
+          }),
         }
       );
-  };
 
+      const data = await res.json();
+
+      if (!res.ok) {
+        toast.error(data.message || "Failed to submit form. Please try again");
+        return;
+      }
+
+      toast.success(data.message || "Form submitted successfully");
+
+      setFormData({
+        firstName: "",
+        lastName: "",
+        email: "",
+        phoneNumber: "",
+        selectedService: "",
+        message: "",
+      });
+    } catch (error) {
+      console.error("Form submission error", error);
+      toast.error(
+        "Failed to submit form. Please check your connection and try again."
+      );
+    } finally {
+      setLoading(false);
+    }
+  };
   return (
     <Section id="contact">
+      <Toaster
+        position="top-center"
+        toastOptions={{
+          duration: 4000,
+          style: {
+            background: "#333",
+            color: "#fff",
+          },
+          success: {
+            duration: 3000,
+            iconTheme: {
+              primary: "#00ff99",
+              secondary: "#fff",
+            },
+          },
+          error: {
+            duration: 4000,
+            iconTheme: {
+              primary: "#ef4444",
+              secondary: "#fff",
+            },
+          },
+        }}
+      />
       <div className=" mx-4 xl:container min-h-screen">
         <div className="flex flex-col xl:flex-row gap-12">
           <div className="xl:w-[54%] order-2 xl:order-0">
             <form
-              ref={formRef}
-              onSubmit={sendEmail}
+              onSubmit={handleSubmit}
               className="flex flex-col gap-6 p-10 bg-[#27272c] rounded-4xl"
             >
               <h3 className="text-[#00ff99] text-2xl ">
@@ -75,29 +139,47 @@ export default function Contact() {
               </p>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <Input
-                  name="first_name"
+                  name="firstName"
                   type="text"
+                  value={formData.firstName}
+                  onChange={handleChange}
                   placeholder="First name"
                   required
                 />
                 <Input
-                  name="last_name"
+                  name="lastName"
                   type="text"
+                  value={formData.lastName}
+                  onChange={handleChange}
                   placeholder="Last name"
                   required
                 />
-                <Input name="email" type="email" placeholder="Email" required />
                 <Input
-                  name="phone"
+                  name="email"
+                  type="email"
+                  placeholder="Email"
+                  value={formData.email}
+                  onChange={handleChange}
+                  required
+                />
+                <Input
+                  name="phoneNumber"
                   type="tel"
                   placeholder="Phone number"
+                  value={formData.phoneNumber}
+                  onChange={handleChange}
                   required
                 />
               </div>
               <SelectPrimitive.Root
-                value={selectedService}
-                onValueChange={setSelectedService}
                 name="service"
+                value={formData.selectedService}
+                onValueChange={(value) =>
+                  setFormData((prev) => ({
+                    ...prev,
+                    selectedService: value,
+                  }))
+                }
               >
                 <SelectPrimitive.Trigger
                   className="flex h-[48px] w-full items-center justify-between rounded-md border border-white/10 bg-primary px-4 py-5 text-base text-white/60 placeholder:text-white/10 focus:border-accent outline-none"
@@ -118,34 +200,36 @@ export default function Contact() {
                           Select a service
                         </SelectPrimitive.Label>
 
-                        {["Website Development", "Web App Development"].map(
-                          (service) => (
-                            <SelectPrimitive.Item
-                              key={service}
-                              value={service}
-                              className="px-4 py-2 cursor-pointer hover:bg-accent text-white flex items-center justify-between"
-                            >
-                              <SelectPrimitive.ItemText>
-                                {service}
-                              </SelectPrimitive.ItemText>
-                              <SelectPrimitive.ItemIndicator>
-                                <Check className="w-4 h-4 text-white" />
-                              </SelectPrimitive.ItemIndicator>
-                            </SelectPrimitive.Item>
-                          )
-                        )}
+                        {[
+                          "Website Development",
+                          "Web App Development",
+                          "Mobile App Development",
+                        ].map((service) => (
+                          <SelectPrimitive.Item
+                            key={service}
+                            value={service}
+                            className="px-4 py-2 cursor-pointer hover:bg-accent text-white flex items-center justify-between"
+                          >
+                            <SelectPrimitive.ItemText>
+                              {service}
+                            </SelectPrimitive.ItemText>
+                            <SelectPrimitive.ItemIndicator>
+                              <Check className="w-4 h-4 text-white" />
+                            </SelectPrimitive.ItemIndicator>
+                          </SelectPrimitive.Item>
+                        ))}
                       </SelectPrimitive.Group>
                     </SelectPrimitive.Viewport>
                   </SelectPrimitive.Content>
                 </SelectPrimitive.Portal>
               </SelectPrimitive.Root>
-              {/* Hidden input for EmailJS */}
-              <input type="hidden" name="service" value={selectedService} />
 
               <Textarea
                 name="message"
                 className="h-[200px] focus-visible:ring-accent focus-visible:ring-1 focus-visible:ring-offset-0 disabled:cursor-not-allowed disabled:opacity-50"
                 placeholder="Type your message here"
+                value={formData.message}
+                onChange={handleChange}
                 required
               />
               <Button
@@ -154,7 +238,7 @@ export default function Contact() {
                 className="max-w-40"
                 type="submit"
               >
-                Send Message
+                {loading ? "Sending..." : "Send Message"}
               </Button>
             </form>
           </div>

@@ -19,11 +19,13 @@ import {
   SiExpo,
   SiMysql,
   SiMongodb,
+  
 } from "react-icons/si";
 
 const skills = [
   { icon: <SiNextdotjs />, name: "next.js" },
   { icon: <SiNestjs />, name: "Nest.js" },
+  { icon: '', name: "React native" },
   { icon: <SiReact />, name: "react.js" },
   { icon: <SiTypescript />, name: "Typescript" },
   { icon: <FaNodeJs />, name: "Node.js" },

@@ -57,6 +57,7 @@ export default function Contact() {
         `${process.env.NEXT_PUBLIC_API_URL}/user/consultation`,
         {
           method: "POST",
+          
           headers: {
             "Content-Type": "application/json",
           },
@@ -171,59 +172,58 @@ export default function Contact() {
                   required
                 />
               </div>
-              <SelectPrimitive.Root
-                name="service"
-                value={formData.selectedService}
-                onValueChange={(value) =>
-                  setFormData((prev) => ({
-                    ...prev,
-                    selectedService: value,
-                  }))
-                }
-              >
-                <SelectPrimitive.Trigger
-                  className="flex h-[48px] w-full items-center justify-between rounded-md border border-white/10 bg-primary px-4 py-5 text-base text-white/60 placeholder:text-white/10 focus:border-accent outline-none"
-                  aria-label="Service"
-                >
-                  <SelectPrimitive.Value placeholder="Select a service" />
-                </SelectPrimitive.Trigger>
-                <SelectPrimitive.Portal>
-                  <SelectPrimitive.Content
-                    className="z-50 bg-primary border border-white/10 rounded-md shadow-md"
-                    position="popper"
-                    side="top"
-                    sideOffset={5}
-                  >
-                    <SelectPrimitive.Viewport>
-                      <SelectPrimitive.Group>
-                        <SelectPrimitive.Label className="text-white/40 px-4 py-2">
-                          Select a service
-                        </SelectPrimitive.Label>
+         {/* Remove the name="service" from Root, it's not needed */}
+<SelectPrimitive.Root
+  value={formData.selectedService}
+  onValueChange={(value) =>
+    setFormData((prev) => ({
+      ...prev,
+      selectedService: value,
+    }))
+  }
+>
+  <SelectPrimitive.Trigger
+    className="flex h-[48px] w-full items-center justify-between rounded-md border border-white/10 bg-primary px-4 py-5 text-base text-white/60 placeholder:text-white/10 focus:border-accent outline-none"
+    aria-label="Service"
+  >
+    <SelectPrimitive.Value placeholder="Select a service" />
+  </SelectPrimitive.Trigger>
+  <SelectPrimitive.Portal>
+    <SelectPrimitive.Content
+      className="z-50 bg-primary border border-white/10 rounded-md shadow-md"
+      position="popper"
+      side="top"
+      sideOffset={5}
+    >
+      <SelectPrimitive.Viewport>
+        <SelectPrimitive.Group>
+          <SelectPrimitive.Label className="text-white/40 px-4 py-2">
+            Select a service
+          </SelectPrimitive.Label>
 
-                        {[
-                          "Website Development",
-                          "Web App Development",
-                          "Mobile App Development",
-                        ].map((service) => (
-                          <SelectPrimitive.Item
-                            key={service}
-                            value={service}
-                            className="px-4 py-2 cursor-pointer hover:bg-accent text-white flex items-center justify-between"
-                          >
-                            <SelectPrimitive.ItemText>
-                              {service}
-                            </SelectPrimitive.ItemText>
-                            <SelectPrimitive.ItemIndicator>
-                              <Check className="w-4 h-4 text-white" />
-                            </SelectPrimitive.ItemIndicator>
-                          </SelectPrimitive.Item>
-                        ))}
-                      </SelectPrimitive.Group>
-                    </SelectPrimitive.Viewport>
-                  </SelectPrimitive.Content>
-                </SelectPrimitive.Portal>
-              </SelectPrimitive.Root>
-
+          {[
+            "Website Development",
+            "Web App Development",
+            "Mobile App Development",
+          ].map((service) => (
+            <SelectPrimitive.Item
+              key={service}
+              value={service}
+              className="px-4 py-2 cursor-pointer hover:bg-accent text-white flex items-center justify-between"
+            >
+              <SelectPrimitive.ItemText>
+                {service}
+              </SelectPrimitive.ItemText>
+              <SelectPrimitive.ItemIndicator>
+                <Check className="w-4 h-4 text-white" />
+              </SelectPrimitive.ItemIndicator>
+            </SelectPrimitive.Item>
+          ))}
+        </SelectPrimitive.Group>
+      </SelectPrimitive.Viewport>
+    </SelectPrimitive.Content>
+  </SelectPrimitive.Portal>
+</SelectPrimitive.Root>
               <Textarea
                 name="message"
                 className="h-[200px] focus-visible:ring-accent focus-visible:ring-1 focus-visible:ring-offset-0 disabled:cursor-not-allowed disabled:opacity-50"

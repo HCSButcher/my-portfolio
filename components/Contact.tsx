@@ -8,6 +8,10 @@ import * as SelectPrimitive from "@radix-ui/react-select";
 import { FaPhoneAlt, FaEnvelope, FaMapMarkerAlt } from "react-icons/fa";
 import { Check } from "lucide-react";
 import toast, { Toaster } from "react-hot-toast";
+import emailjs from '@emailjs/browser';
+
+// Initialize EmailJS with your public key
+emailjs.init("szm5rBcxM44y9nNqc"); // Replace with your actual public key
 
 const info = [
   {
@@ -52,35 +56,54 @@ export default function Contact() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
+
     try {
-      const res = await fetch(
-        `${process.env.NEXT_PUBLIC_API_URL}/user/consultation`,
-        {
-          method: "POST",
-          
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            firstName: formData.firstName,
-            lastName: formData.lastName,
-            phoneNumber: formData.phoneNumber,
-            email: formData.email,
-            selectedService: formData.selectedService,
-            message: formData.message,
-          }),
-        }
+      // Format the current year for the email template
+      const currentYear = new Date().getFullYear();
+
+      // Prepare template parameters for User Email
+      const userTemplateParams = {
+        to_name: formData.firstName,
+        to_email: formData.email,
+        from_name: "Butcher Tech Solutions",
+        reply_to: "noreply@butchertech.com",
+        year: currentYear,
+        message: formData.message,
+        phone: formData.phoneNumber,
+        service: formData.selectedService,
+        full_name: `${formData.firstName} ${formData.lastName}`
+      };
+
+      // Send email to user
+      await emailjs.send(
+        'service_3om36yo', // Replace with your EmailJS service ID
+        'template_y0mqnfq', // Replace with your user template ID
+        userTemplateParams
       );
 
-      const data = await res.json();
+      // Prepare template parameters for Admin Email
+      const adminTemplateParams = {
+        to_name: "Admin",
+        to_email: "trevor254oduol@gmail.com", // Your email
+        from_name: `${formData.firstName} ${formData.lastName}`,
+        from_email: formData.email,
+        phone: formData.phoneNumber,
+        service: formData.selectedService,
+        message: formData.message,
+        year: currentYear,
+        reply_to: formData.email
+      };
 
-      if (!res.ok) {
-        toast.error(data.message || "Failed to submit form. Please try again");
-        return;
-      }
+      // Send email to admin
+      await emailjs.send(
+        'service_3om36yo', // Replace with your EmailJS service ID
+        'template_fl8ad3g', // Replace with your admin template ID
+        adminTemplateParams
+      );
 
-      toast.success(data.message || "Form submitted successfully");
-
+      toast.success("Message sent successfully! Check your email for confirmation.");
+      
+      // Reset form
       setFormData({
         firstName: "",
         lastName: "",
@@ -89,15 +112,17 @@ export default function Contact() {
         selectedService: "",
         message: "",
       });
+      
     } catch (error) {
       console.error("Form submission error", error);
       toast.error(
-        "Failed to submit form. Please check your connection and try again."
+        "Failed to send message. Please try again."
       );
     } finally {
       setLoading(false);
     }
   };
+
   return (
     <Section id="contact">
       <Toaster
@@ -172,58 +197,59 @@ export default function Contact() {
                   required
                 />
               </div>
-         {/* Remove the name="service" from Root, it's not needed */}
-<SelectPrimitive.Root
-  value={formData.selectedService}
-  onValueChange={(value) =>
-    setFormData((prev) => ({
-      ...prev,
-      selectedService: value,
-    }))
-  }
->
-  <SelectPrimitive.Trigger
-    className="flex h-[48px] w-full items-center justify-between rounded-md border border-white/10 bg-primary px-4 py-5 text-base text-white/60 placeholder:text-white/10 focus:border-accent outline-none"
-    aria-label="Service"
-  >
-    <SelectPrimitive.Value placeholder="Select a service" />
-  </SelectPrimitive.Trigger>
-  <SelectPrimitive.Portal>
-    <SelectPrimitive.Content
-      className="z-50 bg-primary border border-white/10 rounded-md shadow-md"
-      position="popper"
-      side="top"
-      sideOffset={5}
-    >
-      <SelectPrimitive.Viewport>
-        <SelectPrimitive.Group>
-          <SelectPrimitive.Label className="text-white/40 px-4 py-2">
-            Select a service
-          </SelectPrimitive.Label>
 
-          {[
-            "Website Development",
-            "Web App Development",
-            "Mobile App Development",
-          ].map((service) => (
-            <SelectPrimitive.Item
-              key={service}
-              value={service}
-              className="px-4 py-2 cursor-pointer hover:bg-accent text-white flex items-center justify-between"
-            >
-              <SelectPrimitive.ItemText>
-                {service}
-              </SelectPrimitive.ItemText>
-              <SelectPrimitive.ItemIndicator>
-                <Check className="w-4 h-4 text-white" />
-              </SelectPrimitive.ItemIndicator>
-            </SelectPrimitive.Item>
-          ))}
-        </SelectPrimitive.Group>
-      </SelectPrimitive.Viewport>
-    </SelectPrimitive.Content>
-  </SelectPrimitive.Portal>
-</SelectPrimitive.Root>
+              <SelectPrimitive.Root
+                value={formData.selectedService}
+                onValueChange={(value) =>
+                  setFormData((prev) => ({
+                    ...prev,
+                    selectedService: value,
+                  }))
+                }
+              >
+                <SelectPrimitive.Trigger
+                  className="flex h-[48px] w-full items-center justify-between rounded-md border border-white/10 bg-primary px-4 py-5 text-base text-white/60 placeholder:text-white/10 focus:border-accent outline-none"
+                  aria-label="Service"
+                >
+                  <SelectPrimitive.Value placeholder="Select a service" />
+                </SelectPrimitive.Trigger>
+                <SelectPrimitive.Portal>
+                  <SelectPrimitive.Content
+                    className="z-50 bg-primary border border-white/10 rounded-md shadow-md"
+                    position="popper"
+                    side="top"
+                    sideOffset={5}
+                  >
+                    <SelectPrimitive.Viewport>
+                      <SelectPrimitive.Group>
+                        <SelectPrimitive.Label className="text-white/40 px-4 py-2">
+                          Select a service
+                        </SelectPrimitive.Label>
+
+                        {[
+                          "Website Development",
+                          "Web App Development",
+                          "Mobile App Development",
+                        ].map((service) => (
+                          <SelectPrimitive.Item
+                            key={service}
+                            value={service}
+                            className="px-4 py-2 cursor-pointer hover:bg-accent text-white flex items-center justify-between"
+                          >
+                            <SelectPrimitive.ItemText>
+                              {service}
+                            </SelectPrimitive.ItemText>
+                            <SelectPrimitive.ItemIndicator>
+                              <Check className="w-4 h-4 text-white" />
+                            </SelectPrimitive.ItemIndicator>
+                          </SelectPrimitive.Item>
+                        ))}
+                      </SelectPrimitive.Group>
+                    </SelectPrimitive.Viewport>
+                  </SelectPrimitive.Content>
+                </SelectPrimitive.Portal>
+              </SelectPrimitive.Root>
+
               <Textarea
                 name="message"
                 className="h-[200px] focus-visible:ring-accent focus-visible:ring-1 focus-visible:ring-offset-0 disabled:cursor-not-allowed disabled:opacity-50"
@@ -237,6 +263,7 @@ export default function Contact() {
                 size="md"
                 className="max-w-40"
                 type="submit"
+                disabled={loading}
               >
                 {loading ? "Sending..." : "Send Message"}
               </Button>

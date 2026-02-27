@@ -19,7 +19,25 @@ import WorkSliderBtn from "./WorkSliderBtn";
 import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
-const projects = [
+// Define types for better type safety
+interface Project {
+  num: string;
+  category: string;
+  title: string;
+  description: {
+    overview: string;
+    details: string[];
+    outcome: string;
+  };
+  technicalDetails: {
+    [key: string]: string[]; // Index signature for dynamic categories
+  };
+  image: string;
+  live: string | undefined;
+  github: string | undefined;
+}
+
+const projects: Project[] = [
   {
     num: "01",
     category: "Full-Stack | Mobile",
@@ -254,7 +272,7 @@ const projects = [
 ];
 
 export default function Projects() {
-  const [project, setProject] = useState(projects[0]);
+  const [project, setProject] = useState<Project>(projects[0]);
   const [activeTab, setActiveTab] = useState("overview");
 
   const handleSlideChange = (swiper: SwiperType) => {
@@ -269,7 +287,7 @@ export default function Projects() {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
-          className="text-4xl md:text-5xl font-bold text-center mb-12 bg-linear-to-r from-white to-[#00ff99] bg-clip-text text-transparent"
+          className="text-4xl md:text-5xl font-bold text-center mb-12 bg-gradient-to-r from-white to-[#00ff99] bg-clip-text text-transparent"
         >
           Featured Projects
         </motion.h2>
@@ -337,28 +355,30 @@ export default function Projects() {
 
                 <TabsContent value="details" className="mt-4">
                   <ul className="space-y-3">
-                    {project.description.details.map((detail, idx) => (
-                      <li
-                        key={idx}
-                        className="flex items-start gap-2 text-white/80"
-                      >
-                        <span className="text-[#00ff99] mt-1">•</span>
-                        <span>{detail}</span>
-                      </li>
-                    ))}
+                    {project.description.details.map(
+                      (detail: string, idx: number) => (
+                        <li
+                          key={idx}
+                          className="flex items-start gap-2 text-white/80"
+                        >
+                          <span className="text-[#00ff99] mt-1">•</span>
+                          <span>{detail}</span>
+                        </li>
+                      ),
+                    )}
                   </ul>
                 </TabsContent>
 
                 <TabsContent value="tech" className="mt-4">
                   <div className="space-y-4">
                     {Object.entries(project.technicalDetails).map(
-                      ([category, items]) => (
+                      ([category, items]: [string, string[]]) => (
                         <div key={category}>
                           <h4 className="text-[#00ff99] font-semibold capitalize mb-2">
                             {category.replace(/([A-Z])/g, " $1").trim()}:
                           </h4>
                           <div className="flex flex-wrap gap-2">
-                            {items.map((item, idx) => (
+                            {items.map((item: string, idx: number) => (
                               <Badge
                                 key={idx}
                                 variant="secondary"

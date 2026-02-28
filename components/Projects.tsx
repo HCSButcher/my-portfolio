@@ -142,7 +142,7 @@ const projects: Project[] = [
   {
     num: "04",
     category: "Backend | Volunteering",
-    title: "Aquila Website | Jan 2026",
+    title: "Aquila Website | Jan 2026 - present",
     description: {
       overview:
         "Aquila Cyber needed a dynamic website with real-time course listings and automated notifications for contact forms and partnership inquiries. Built a complete backend from scratch to replace static content with dynamic data and secure admin controls.",
@@ -166,7 +166,7 @@ const projects: Project[] = [
       security: ["JWT", "Rate Limiting", "Input Validation"],
     },
     image: "/assets/work/aquilawebsite.png",
-    live: undefined,
+    live: "https://aquila-sigma.vercel.app/",
     github: undefined,
   },
   {
@@ -232,7 +232,7 @@ const projects: Project[] = [
       security: ["Input Validation", "Rate Limiting", "CORS"],
     },
     image: "/assets/work/altura.png",
-    live: undefined,
+    live: "https://altura-six.vercel.app/",
     github: undefined,
   },
   {
@@ -411,19 +411,11 @@ export default function Projects() {
                     target="_blank"
                     rel="noopener noreferrer"
                   >
-                    <TooltipProvider delayDuration={100}>
-                      <Tooltip>
-                        <TooltipTrigger className="group w-[50px] h-[50px] rounded-full bg-white/5 hover:bg-[#00ff99] flex justify-center items-center transition-all duration-300">
-                          <BsArrowUpRight className="text-2xl text-white group-hover:text-black transition-colors" />
-                        </TooltipTrigger>
-                        <TooltipContent
-                          side="bottom"
-                          className="bg-[#00ff99] text-black border-none"
-                        >
-                          <p>Live Demo</p>
-                        </TooltipContent>
-                      </Tooltip>
-                    </TooltipProvider>
+                    <div className="p-2 font-bold border rounded-xl border-[#00ff99] bg-transparent hover:bg-[#00ff99] transition-all">
+                      <p className="text-center  hover:text-[#020617] text-[#00ff99]">
+                        Live
+                      </p>
+                    </div>
                   </Link>
                 )}
                 {project.github && (

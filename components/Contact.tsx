@@ -8,7 +8,7 @@ import * as SelectPrimitive from "@radix-ui/react-select";
 import { FaPhoneAlt, FaEnvelope, FaMapMarkerAlt } from "react-icons/fa";
 import { Check } from "lucide-react";
 import toast, { Toaster } from "react-hot-toast";
-import emailjs from '@emailjs/browser';
+import emailjs from "@emailjs/browser";
 
 // Initialize EmailJS with your public key
 emailjs.init("szm5rBcxM44y9nNqc"); // Replace with your actual public key
@@ -44,7 +44,7 @@ export default function Contact() {
   const handleChange = (
     e: React.ChangeEvent<
       HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
-    >
+    >,
   ) => {
     setFormData({
       ...formData,
@@ -71,14 +71,14 @@ export default function Contact() {
         message: formData.message,
         phone: formData.phoneNumber,
         service: formData.selectedService,
-        full_name: `${formData.firstName} ${formData.lastName}`
+        full_name: `${formData.firstName} ${formData.lastName}`,
       };
 
       // Send email to user
       await emailjs.send(
-        'service_3om36yo', // Replace with your EmailJS service ID
-        'template_y0mqnfq', // Replace with your user template ID
-        userTemplateParams
+        "service_3om36yo", // Replace with your EmailJS service ID
+        "template_y0mqnfq", // Replace with your user template ID
+        userTemplateParams,
       );
 
       // Prepare template parameters for Admin Email
@@ -91,18 +91,20 @@ export default function Contact() {
         service: formData.selectedService,
         message: formData.message,
         year: currentYear,
-        reply_to: formData.email
+        reply_to: formData.email,
       };
 
       // Send email to admin
       await emailjs.send(
-        'service_3om36yo', // Replace with your EmailJS service ID
-        'template_fl8ad3g', // Replace with your admin template ID
-        adminTemplateParams
+        "service_3om36yo", // Replace with your EmailJS service ID
+        "template_fl8ad3g", // Replace with your admin template ID
+        adminTemplateParams,
       );
 
-      toast.success("Message sent successfully! Check your email for confirmation.");
-      
+      toast.success(
+        "Message sent successfully! Check your email for confirmation.",
+      );
+
       // Reset form
       setFormData({
         firstName: "",
@@ -112,12 +114,9 @@ export default function Contact() {
         selectedService: "",
         message: "",
       });
-      
     } catch (error) {
       console.error("Form submission error", error);
-      toast.error(
-        "Failed to send message. Please try again."
-      );
+      toast.error("Failed to send message. Please try again.");
     } finally {
       setLoading(false);
     }
